@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qorqpa Project — Қорықпа, сен жалғыз емессің</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4bb543;
+            --warning: #f9c74f;
+            --danger: #ef476f;
+            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            --gradient-accent: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);
+            --gradient-warning: linear-gradient(135deg, #f9c74f 0%, #f8961e 100%);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f6f9ff 0%, #eef5ff 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234361ee' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 1;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0) rotateX(0);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 auto 1rem;
+            color: var(--dark);
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            color: #6b7280;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding: 0 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-items: center;
+            padding: 0 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-description {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Bullying Info Section */
+        .bullying-section {
+            background-color: #ffffff;
+        }
+
+        .bullying-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bullying-block {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .bullying-block.reverse {
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+        }
+
+        .bullying-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .bullying-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bullying-text h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .bullying-text p,
+        .bullying-text ul {
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .bullying-text ul {
+            padding-left: 1.25rem;
+            list-style: disc;
+        }
+
+        .bullying-separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.7), transparent);
+            margin: 2rem 0 1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 1;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Founder Section */
+        .founder-section {
+            background-color: #f8fafc;
+        }
+
+        .founder-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .founder-photos {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .founder-photo {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .founder-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .founder-photo.primary {
+            transform: translateY(0);
+        }
+
+        .founder-photo.secondary {
+            opacity: 0.95;
+        }
+
+        .founder-text p {
+            color: #4b5563;
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+        }
+
+        .founder-text strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .founder-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .founder-section {
+                padding-top: 3.5rem;
+                padding-bottom: 3.5rem;
+            }
+
+            .founder-photos {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer-about p {
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .footer-contact p {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .footer-contact i {
+            color: var(--primary);
+            margin-top: 0.25rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-image {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                Qorqpa
+            </a>
+            <div class="nav-links">
+                <a href="#bullying-info" class="nav-link">Буллинг туралы</a>
+                <a href="#features" class="nav-link">Біз қалай көмектесеміз</a>
+                <a href="#founder" class="nav-link">Жоба авторы</a>
+                <a href="#help" class="btn btn-outline">Көмек алу</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Қорықпа, сен жалғыз емессің</h1>
+                <p class="hero-subtitle">Біз сені түсінеміз және қолдауға дайынбыз. Буллинг пен кибербуллингке қарсы бірге тұрайық.</p>
+                <div class="hero-cta">
+                    <a href="#help" class="btn btn-primary">Көмек алу</a>
+                    <a href="#about" class="btn btn-outline">Көбірек білу</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Support and Care">
+            </div>
+        </div>
+    </section>
+
+    <!-- Bullying Info Section -->
+    <section class="section bullying-section" id="bullying-info">
+        <h2 class="section-title">Буллинг және кибербуллинг туралы</h2>
+        <p class="section-subtitle">Буллингті түсіну — оны тоқтатудың алғашқы қадамы. Төменде маңызды ақпарат пен кеңестер берілген.</p>
+
+        <div class="bullying-container">
+            <!-- Буллинг дегеніміз не? -->
+            <div class="bullying-block">
+                <div class="bullying-image">
+                    <img src="WhatsApp Image 2026-02-07 at 16.35.48.jpeg" alt="Психологпен сөйлесіп отырған бала">
+                </div>
+                <div class="bullying-text">
+                    <h3>Буллинг дегеніміз не?</h3>
+                    <p>Буллингтің ең кең тараған анықтамасы — бұл бір адамға әдейі және бірнеше рет психологиялық немесе физикалық зиян келтіру. Көбіне қорланған балалар өздерін қорғауда қиындық көреді. Бұл жағдай тараптар арасындағы билік теңсіздігін көрсетеді: буллингке ұшыраған баланың күші, беделі немесе әлеуметтік қолдауы бұзақыға қарағанда аз болады.</p>
+                    <p>Буллинг әртүрлі формада кездеседі. Көбінесе ол ауызша қорлау, мазақ ету және көпшілік алдында кемсіту арқылы көрінеді. Алайда буллингтің басқа да түрлері бар: физикалық, әлеуметтік және кибербуллинг. Көп жағдайда бір бала бірнеше жолмен қорқытуға ұшырайды, яғни бұл бір реттік оқиға емес, ұзақ уақытқа созылатын процесс. Буллинг — бұзақы мен жәбірленуші арасындағы тұрақты қарым-қатынас, ол қорлау күту сезімімен және құрдастар ортасындағы жалпы жағдаймен байланысты.</p>
+                </div>
+            </div>
+
+            <!-- Кибербуллинг дегеніміз не? -->
+            <div class="bullying-block reverse">
+                <div class="bullying-text">
+                    <h3>Кибербуллинг дегеніміз не?</h3>
+                    <p>Кибербуллингтің ең жиі қолданылатын анықтамасы — бұл бір адамға интернет, әлеуметтік желілер немесе мессенджерлер арқылы әдейі және бірнеше рет психологиялық зиян келтіру. Кибербуллингке ұшыраған балалар өздерін қорғауда қиындықтарға тап болады, себебі қорлау тәулік бойы тоқтаусыз жалғасуы мүмкін. Бұл жағдай да билік теңгерімсіздігін көрсетеді: жәбірленушінің әлеуметтік қолдауы аз, ал бұзақы анонимділікке сүйеніп әрекет етеді.</p>
+                    <p>Кибербуллинг әртүрлі формада көрінеді. Көбінесе ол қорлайтын хабарламалар, мазақ ететін пікірлер, жалған ақпарат тарату немесе жеке суреттерді рұқсатсыз жариялау арқылы жүзеге асады. Кибербуллинг бір реттік хабарлама емес, қайталанатын және жүйелі әрекет болып табылады. Бұл жәбірленушіде үнемі қорлау болады деген қорқыныш сезімін тудырады және оның психологиялық жағдайына қатты әсер етеді.</p>
+                </div>
+                <div class="bullying-image">
+                    <img src="WhatsApp Image 2026-02-07 at 16.35.49.jpeg" alt="Анасымен сөйлесіп отырған жасөспірім">
+                </div>
+            </div>
+
+            <div class="bullying-separator"></div>
+
+            <!-- Қорқыту сәулеті -->
+            <div class="bullying-block">
+                <div class="bullying-image">
+                    <img src="WhatsApp Image 2026-02-07 at 16.46.47.jpeg" alt="Құрдастарының қорқытуына ұшыраған оқушы">
+                </div>
+                <div class="bullying-text">
+                    <h3>Қорқыту сәулеті</h3>
+                    <p>Буллинг — бұл тек екі адамның арасындағы мәселе емес, ол топтық құбылыс. Көп жағдайда бұзақылар қорқыту арқылы құрдастарының арасында бедел жинауға, билікке және жоғары әлеуметтік мәртебеге жетуге тырысады. Сондықтан буллинг кезінде көрермендер немесе өтіп бара жатқан адамдар маңызды рөл атқарады.</p>
+                    <p>Бұл көрермендер әртүрлі әрекет етуі мүмкін. Кейбіреулері бұзақының әрекетін күлкімен, сөзбен  қолдап, оны әлеуметтік түрде күшейтеді. Басқа көрермендер бұзақыға тікелей көмектесуі мүмкін. Мысалы, кейбір балалар өздері бастамасы болмаса да, қорқытуға қосылып кетеді.</p>
+                    <p>Кейбір оқушылар не болып жатқанын көрсе де, үнсіз қалады. Олар бұзақылықты үнсіздікпен қарайды, өйткені өздері үшін қорқыныш туындайды деп ойлауы мүмкін. Ал кейбір студенттер қорқытуды көріп, араласуға немесе жәбірленуші баланы қорғауға батылдық табады.</p>
+                </div>
+            </div>
+
+            <div class="bullying-separator"></div>
+
+            <!-- Ескерту белгілері -->
+            <div class="bullying-block reverse">
+                <div class="bullying-text">
+                    <h3>Ескерту белгілері</h3>
+                    <p>Буллингтің салдары баланың психологиялық және физикалық жағдайына әртүрлі әсер етуі мүмкін. Мәселені ерте байқау — буллингке қарсы әрекеттердің ең маңызды алғашқы қадамы. Сондықтан ескерту белгілерін анықтау және балаға қолдау көрсету өте қажет.</p>
+                    <p>Буллингке ұшыраған барлық балалар бірдей көмек сұрай бермейді. Кейбір балаларда мүлде айқын белгілер болмауы мүмкін. Сонымен қатар, бұл белгілер үйдегі қиындықтар немесе депрессия сияқты басқа да себептерден туындауы ықтимал.</p>
+                    <p>Баланың мінез-құлқындағы өзгерістердің кейбір мысалдары:</p>
+                    <ul>
+                        <li>мектепке жаяу барудан немесе автобусқа мінуден қорқу;</li>
+                        <li>бас ауруы немесе іштің ауыруына байланысты мектепке бармау;</li>
+                        <li>физикалық агрессияның байқалатын белгілері;</li>
+                        <li>баланың тұйық, мазасыз, ашуланшақ немесе тез ренжігіш болуы.</li>
+                    </ul>
+                    <p>Мінез-құлықтағы кенеттен өзгерістер буллингтің белгісі болуы мүмкін. Ата-аналар баласының көңіл күйін және мінезін жақсы біледі. Егер мұндай өзгерістердің нақты себебі болмаса, бұл жағдайға міндетті түрде назар аудару қажет.</p>
+                </div>
+                <div class="bullying-image">
+                    <img src="WhatsApp Image 2026-02-07 at 16.53.49.jpeg" alt="Құрдастарының ортасында өзін жалғыз сезінген жасөспірім">
+                </div>
+            </div>
+
+            <div class="bullying-separator"></div>
+
+            <!-- Буллингке ұшырағанда не істеу керек? -->
+            <div class="bullying-block">
+                <div class="bullying-image">
+                    <img src="WhatsApp Image 2026-02-07 at 16.35.49.jpeg" alt="Қолдау көрсететін ересек пен жасөспірім">
+                </div>
+                <div class="bullying-text">
+                    <h3>Буллингке ұшырағанда не істеу керек?</h3>
+                    <p>Егер саған буллинг жасалса, жалғыз қалмау өте маңызды. Кейде үндемеу оңай көрінуі мүмкін, бірақ ең дұрыс шешім — біреумен сөйлесу және қолдау табу. Бұл жағдайды жеңілдетудің ең маңызды қадамы.</p>
+                    <p>Ең алдымен, сенім артатын адамға айт. Бұл мектептегі сыныптасың, досың, ата-анаң немесе мұғалім болуы мүмкін. Ересектердің міндеті — саған көмектесу, сондықтан көмек сұраудан қорықпа.</p>
+                    <p>Сыныбыңдағы сені қолдай алатын достарды тап. Егер мұғалімге жалғыз баруға ұялсаң немесе қорықсаң, досыңнан бірге баруын сұра. Бірге айту — әлдеқайда жеңіл.</p>
+                    <p>Өзіңді сенімді ұстауға тырыс. Денеңмен және қимылыңмен жаман қарым-қатынасты қабылдамайтыныңды көрсет. Тік тұр, көзіне тура қара және сабырлы, анық дауыспен бұл әрекет саған жағымсыз екенін және оны тоқтату керектігін айт. Кей жағдайда бұл буллингті тоқтатудың алғашқы қадамы болуы мүмкін.</p>
+                    <p>Егер мүмкіндік болса, жағдайдан алыстауға тырыс. Буллингке мән бермегендей көрініп, қауіпсіз жерге кет және болған жағдайды міндетті түрде біреуге айтып бер.</p>
+                    <p>Әрбір буллинг жағдайы әртүрлі, сондықтан барлығына бірдей шешім жоқ. Бұл — өз бетіңше қолдануға болатын ұсыныстар ғана. Ең бастысы — буллингті ішіңде сақтама, міндетті түрде біреуге айт.</p>
+                </div>
+            </div>
+
+            <div class="bullying-separator"></div>
+
+            <!-- Қазақстанда буллингке қарсы тегін көмек -->
+            <div class="bullying-block reverse">
+                <div class="bullying-text">
+                    <h3>Қазақстанда буллингке қарсы тегін көмек бар</h3>
+                    <p>Буллингке ұшырасаң — бұл сенің кінәң емес. Ең маңыздысы: Қазақстанда сен жалғыз емессің және тегін көмек бар. Көмек сұрау — әлсіздік емес, керісінше батылдық.</p>
+                    <p>Егер мектепте, аулада немесе интернетте қорлау, мазақтау, қысым көрсетілсе — үнсіз қалма. Буллингті тоқтатудың ең бірінші және ең күшті қадамы — біреуге айту.</p>
+                    <p>Қазақстанда балалар мен жасөспірімдерге арналған тегін және құпия көмек қызметтері бар. Мысалы, 111 — Балаларға арналған ұлттық сенім телефоны. Бұл жерге кез келген уақытта хабарласып, өз мәселеңді ашық айта аласың. Сені тыңдайды, түсінеді және не істеу керектігін айтып береді. Қоңырау тегін, анонимді және қауіпсіз.</p>
+                    <p>Сонымен қатар, әр мектепте психологтар мен әлеуметтік педагогтар бар. Олардың міндеті — оқушыны қорғау. Олар сенің жағдайыңды құпия сақтауға және нақты көмек көрсетуге тиіс.</p>
+                    <p>Егер буллинг қатерлі сипат алса, яғни қорқыту, қысым көрсету немесе күш қолдану болса, ересектердің араласуы міндетті. Ата-анаға, мұғалімге немесе мектеп әкімшілігіне айту — дұрыс шешім.</p>
+                    <p>Маңыздысы — буллингке шыдау міндет емес. Бұл «өтіп кететін нәрсе» емес. Буллинг — проблема, ал проблемаға көмек бар.</p>
+                </div>
+                <div class="bullying-image">
+                    <img src="WhatsApp Image 2026-02-07 at 16.35.48.jpeg" alt="Қолдау көрсететін маман мен бала">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <h2 class="section-title">Біз қалай көмектесеміз</h2>
+        <p class="section-subtitle">Біз сізге қолдау көрсету және көмектесу үшін осындамыз</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="feature-title">Консультация</h3>
+                <p class="feature-description">Тәжірибелі психологтардан кеңес алыңыз және қолдау табыңыз. Біз сізді тыңдаймыз және көмектесеміз.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="feature-title">Қоғамдастық</h3>
+                <p class="feature-description">Ұқсас тәжірибелерден өткен адамдармен байланыс құрыңыз және бір-біріңізді қолданыңыз.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3 class="feature-title">Білім беру</h3>
+                <p class="feature-description">Буллинг пен кибербуллинг туралы білім алып, оларды жеңу жолдарын үйреніңіз.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about" style="background-color: #f8fafc;">
+        <div class="hero-content" style="max-width: 1000px;">
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="About Us">
+            </div>
+            <div class="hero-text" style="text-align: left;">
+                <h2 class="section-title" style="text-align: left; display: inline-block;">Біз туралы</h2>
+                <p>Qorqpa Project — бұл буллинг пен кибербуллингке қарсы күресетін қоғамдық қозғалыс. Біздің мақсатымыз — әрбір адамның қауіпсіз және қорқынышсыз өмір сүруіне көмектесу.</p>
+                <p>Біз сенеміз, әрбір бала мен жасөспірімнің құрмет пен түсіністікке лайықты өмір сүруге құқығы бар. Біз бұл құқықты қорғау үшін жұмыс істейміз.</p>
+                <div class="hero-cta" style="justify-content: flex-start;">
+                    <a href="#contact" class="btn btn-primary">Бізбен байланысу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <h2 class="section-title">Пайдаланушылардың пікірлері</h2>
+        <p class="section-subtitle">Біздің қызмет пайдаланушыларымыздың пікірлері</p>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">Бұл жоба маған көп көмектесті. Менің балама буллингтен зардап шекті, бірақ бізге көмектескендеріңізге рахмет, енді ол қуанады және өзіне сенімді.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">А</div>
+                    <div class="author-info">
+                        <h4>Айгүл М.</h4>
+                        <p>Ана</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">Мектепте мені қорлады, бірақ бұл жоба арқылы мен өзімді жалғыз емес екенімді түсіндім. Енді менің артымда бүкіл қоғамдастық тұр.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">Н</div>
+                    <div class="author-info">
+                        <h4>Нұрлан Ж.</h4>
+                        <p>Студент</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">Мен мұғаліммін және бұл ресурстар менің оқушыларыма көмектесуге көмектесті. Көптеген балалар буллингтен зардап шегеді, бірақ енді мен оларға қалай көмектесуім керектігін білемін.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">Г</div>
+                    <div class="author-info">
+                        <h4>Гүлнар К.</h4>
+                        <p>Мұғалім</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="help">
+        <div class="cta-content">
+            <h2>Көмек керек пе?</h2>
+            <p>Біз сізбен біргеміз. Дербес және құпия кеңес алу үшін тегін сенім телефондарына хабарласыңыз:</p>
+            <p><strong>111</strong> — Балаларға арналған ұлттық сенім телефоны · <strong>150</strong> — Балалар телефоны · <strong>102</strong> — Қауіп төнген жағдайда полиция.</p>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="section founder-section" id="founder">
+        <div class="founder-container">
+            <div class="founder-photos">
+                <div class="founder-photo primary">
+                    <img src="ззз.jpeg" alt="Qorqpa Project негізін қалаушы Серікқалиева Бибі Фатима">
+                </div>
+                <div class="founder-photo secondary">
+                    <img src="зззз.jpeg" alt="Серікқалиева Бибі Фатима және жетекшісі">
+                </div>
+            </div>
+            <div class="founder-text">
+                <h2 class="section-title">Жоба туралы менің тарихым</h2>
+                <p>Мен – <strong>Серікқалиева Бибі Фатима</strong>, <strong>Qorqpa project</strong>-тің негізін қалаушысымын. Мен Атырау облыстық дарынды балаларға арналған интернаттық мекемесі бар ұлттық гимназияның 10-сынып шәкіртімін.</p>
+                <p>Бұл жобаны ашу себебім – қазіргі қоғамдағы ең өзекті мәселелердің бірі болып отырған <strong>буллинг пен кибербуллингке қарсы күреске</strong> өз үлесімді қосу. Балалардың қауіпсіз, құрметке толы ортада өмір сүруі – мен үшін өте маңызды.</p>
+                <p>Осы жобаның басталуына үлес қосқан жетекшім, сондай-ақ осындай проектіні ашуға бастама салып, қолдау көрсеткен мұғалімім – <strong>Жумабаева Айгуль Сиюгалиевна</strong>, Атырау облыстық дарынды балаларға арналған интернаттық мекемесі бар ұлттық гимназияның тарих және құқық пәндерінің мұғалімі, <strong>педагог-шебер</strong>.</p>
+                <p>Біз бірге буллинг пен кибербуллингке қарсы тұрып, әр бала өз дауысын еркін жеткізе алатын, қорқынышсыз орта қалыптастыруға тырысамыз.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-about">
+                <a href="#" class="footer-logo">Qorqpa</a>
+                <p>Біз буллинг пен кибербуллингке қарсы күресеміз. Біздің мақсатымыз — әрбір адамның қауіпсіз және қорқынышсыз өмір сүруіне көмектесу.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            
+            
+            <div>
+                <h3 class="footer-title">Пайдалы сілтемелер</h3>
+                <ul class="footer-links">
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> Біз туралы</a></li>
+                    <li><a href="#features"><i class="fas fa-chevron-right"></i> Қызметтер</a></li>
+                    <li><a href="#resources"><i class="fas fa-chevron-right"></i> Ресурстар</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Байланыс</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="footer-title">Жедел көмек</h3>
+                <ul class="footer-links">
+                    <li><a href="tel:150"><i class="fas fa-phone-alt"></i> 150 — Балалар телефоны</a></li>
+                    <li><a href="tel:102"><i class="fas fa-shield-alt"></i> 102 — Полиция</a></li>
+                    <li><a href="tel:109"><i class="fas fa-ambulance"></i> 109 — Жедел жәрдем</a></li>
+                    <li><a href="tel:111"><i class="fas fa-headset"></i> 111 — Сенім телефоны</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Qorqpa Project. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Don't prevent default for buttons with no href
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || targetId === '#!') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calculate the position to scroll to
+                    const headerHeight = document.querySelector('.navbar').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                    // Smooth scroll to the target
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without adding to history
+                    history.pushState(null, null, targetId);
+                }
+            });
+        });
+        
+        // Highlight active section in navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function highlightNav() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', highlightNav);
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animation on scroll
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.feature-card, .testimonial-card, .hero-image, .hero-text');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial state for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.feature-card, .testimonial-card, .hero-image, .hero-text');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            });
+            
+            // Trigger animation for hero section immediately
+            const heroText = document.querySelector('.hero-text');
+            const heroImage = document.querySelector('.hero-image');
+            if (heroText) {
+                setTimeout(() => {
+                    heroText.style.opacity = '1';
+                    heroText.style.transform = 'translateY(0)';
+                }, 300);
+            }
+            if (heroImage) {
+                setTimeout(() => {
+                    heroImage.style.opacity = '1';
+                    heroImage.style.transform = 'translateY(0)';
+                }, 500);
+            }
+            
+            // Add scroll event listener for other elements
+            window.addEventListener('scroll', animateOnScroll);
+            // Initial check in case elements are already in view
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
